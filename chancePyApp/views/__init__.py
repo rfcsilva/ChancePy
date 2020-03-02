@@ -1,6 +1,5 @@
-from django.http import HttpResponse
-from .league import *
-
+from .League import *
+from .Country import *
 
 def index(request):
     return HttpResponse("Hello, world. You're at the polls index. Swag")
