@@ -117,3 +117,8 @@ STATIC_URL = '/static/'
 
 # Countries Data file path
 COUNTRIES = 'data/countries.csv'
+
+# Leagues List
+LEAGUES = 'data/leagues.json'
+LEAGUES_ARR = ['data/soccer.json', 'data/handball.json', 'data/basket.json', 'data/voley.json', 'data/hockey.json']
+LEAGUE_LOOKUP_URL = 'https://www.thesportsdb.com/api/v1/json/1/lookupleague.php'

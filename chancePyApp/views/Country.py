@@ -1,11 +1,11 @@
 import json
-import os
 
-from django.core import serializers
 from django.forms import model_to_dict
 from django.http import HttpResponse, JsonResponse
 from django.conf import settings
 import csv
+
+from django.template import loader
 
 from chancePyApp.models import Country
 
@@ -22,9 +22,8 @@ def country_by_id(request, country_id):
     return HttpResponse(serialized_country)
 
 
-def load(request):
+def load_countries(request):
     print('Listing...')
-    print(os.listdir('data'))
 
     if settings.COUNTRIES:
         with open(settings.COUNTRIES) as countries_file:
@@ -40,4 +39,4 @@ def load(request):
                     print(f'name: {row[0]}, code: {row[1]}.')
                     line_count += 1
             print(f'Processed {line_count} lines.')
-    return HttpResponse('')
+    return HttpResponse(loader.get_template('loaded_countries.html').render())
