@@ -10,7 +10,7 @@ urlpatterns = [
 
 
     # Teams endpoints
-    path('teams', views.load_teams),
+    path('teams/load', views.load_teams),
 
     # Countries endpoints
     path('countries/', views.countries_index),
