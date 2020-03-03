@@ -6,6 +6,11 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('league', views.league_index),
+    path('league/count/', views.league_counting),
+
+
+    # Teams endpoints
+    path('teams', views.load_teams),
 
     # Countries endpoints
     path('countries/', views.countries_index),

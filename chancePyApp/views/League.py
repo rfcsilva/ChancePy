@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 from chancePyApp.http import http
 from chancePyApp.models import Country, League
@@ -8,7 +8,17 @@ import time
 
 
 def league_index(request):
-    return HttpResponse("Hello, world. You're at the polls index. League")
+    return JsonResponse(list(League.objects.all().values('name')), safe=False)
+
+
+def league_counting(request):
+    n_soccer = League.objects.filter(sport='Soccer').count()
+    n_handball = League.objects.filter(sport='Handball').count()
+    n_basketball = League.objects.filter(sport='Basketball').count()
+    n_hockey = League.objects.filter(sport='Ice Hockey').count()
+    n_voley = League.objects.filter(sport='Volleyball').count()
+    stats = {'n_soccer': n_soccer, 'n_handball': n_handball, 'n_basketball': n_basketball, 'n_hockey': n_hockey, 'n_voley': n_voley}
+    return JsonResponse(stats, safe=False)
 
 
 def league_details(request):
@@ -23,12 +33,8 @@ def load_leagues(request):
     if settings.LEAGUES_ARR:
         for league_path in settings.LEAGUES_ARR:
             for shallow_league in from_json(league_path):
-                #shallow_league = '1'
-                print('#########################')
-                print(f'Printing shallow League {shallow_league}')
-                load_league(shallow_league)
-                time.sleep(2)
-
+                if not is_in_DB(shallow_league['idLeague']):
+                    load_league(shallow_league)
     return HttpResponse('')
 
 
@@ -36,8 +42,7 @@ def load_league(shallow_league):
     country = None
     if settings.LEAGUE_LOOKUP_URL:
         params = {'id': shallow_league['idLeague']}
-        #params = {'id': 4624}
-        
+            
         #TODO: If data lenght > 1
         data = http.GET(settings.LEAGUE_LOOKUP_URL, params)['leagues'][0]
 
@@ -55,15 +60,14 @@ def load_league(shallow_league):
             league = League(external_id=data['idLeague'], sport=data['strSport'],
                         name=data['strLeague'], currentSeason=data['strCurrentSeason'],
                         country=country)
-            print(league)
-            
+            league.save()            
 
 def fix_country_name(country_name):
 
     print(f'Fixing {country_name}')
-    if country_name in {'England', 'Scotland', 'Wales','Northern Ireland', 'UK'}:
+    if country_name in {'England', 'Scotland', 'Wales','Northern Ireland', 'UK', 'GB'}:
         return 'United Kingdom'
-    elif country_name == "Holland":
+    elif country_name in {"Holland", "The Netherlands"}:
         return 'Netherlands'
     elif country_name == "USA":
         return 'United States'
@@ -73,5 +77,22 @@ def fix_country_name(country_name):
         return "Venezuela, Bolivarian Republic of"
     elif country_name == "Bosnia":
         return 'Bosnia and Herzegovina'
+    elif country_name == "Macedonia":
+        return "Macedonia, the Former Yugoslav Republic of"
+    elif country_name == "Moldova":
+        return "Moldova, Republic of"
+    elif country_name == "Saudi-Arabia":
+        return "Saudi Arabia"
+    elif country_name == "UAE":
+        return "United Arab Emirates"
+    elif country_name == "Bolivia":
+        return "Bolivia, Plurinational State of"
+    elif country_name == "South Korea":
+        return "Korea, Republic of"
+    elif country_name == "Iran":
+        return "Iran, Islamic Republic of"
     else:
         return country_name
+
+def is_in_DB(code):
+    return League.objects.filter(external_id=code).count() > 0
