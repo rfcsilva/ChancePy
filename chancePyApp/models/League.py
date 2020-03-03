@@ -9,3 +9,6 @@ class League(models.Model):
     name = models.CharField(max_length=100)
     currentSeason = models.IntegerField()
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.name}, {self.currentSeason}, {self.sport}, {self.country}, {self.external_id}'

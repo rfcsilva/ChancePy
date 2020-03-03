@@ -1,0 +1,164 @@
+[
+  {
+    "idLeague": "4387",
+    "strLeague": "NBA",
+    "strSport": "Basketball",
+    "strLeagueAlternate": "National Basketball Association"
+  },
+  {
+    "idLeague": "4388",
+    "strLeague": "NBA G League",
+    "strSport": "Basketball",
+    "strLeagueAlternate": "NBA D League"
+  },
+  {
+    "idLeague": "4408",
+    "strLeague": "Spanish Liga ACB",
+    "strSport": "Basketball",
+    "strLeagueAlternate": "Liga Endesa"
+  },
+  {
+    "idLeague": "4423",
+    "strLeague": "French LNB",
+    "strSport": "Basketball",
+    "strLeagueAlternate": "LNB"
+  },
+  {
+    "idLeague": "4431",
+    "strLeague": "British Basketball League",
+    "strSport": "Basketball",
+    "strLeagueAlternate": "BBL"
+  },
+  {
+    "idLeague": "4433",
+    "strLeague": "Italian Lega Basket",
+    "strSport": "Basketball",
+    "strLeagueAlternate": ""
+  },
+  {
+    "idLeague": "4434",
+    "strLeague": "Australian NBL",
+    "strSport": "Basketball",
+    "strLeagueAlternate": null
+  },
+  {
+    "idLeague": "4441",
+    "strLeague": "German BBL",
+    "strSport": "Basketball",
+    "strLeagueAlternate": null
+  },
+  {
+    "idLeague": "4442",
+    "strLeague": "Chinese CBA",
+    "strSport": "Basketball",
+    "strLeagueAlternate": ""
+  },
+  {
+    "idLeague": "4452",
+    "strLeague": "Greek Basket League",
+    "strSport": "Basketball",
+    "strLeagueAlternate": ""
+  },
+  {
+    "idLeague": "4474",
+    "strLeague": "Israeli Basketball Premier League",
+    "strSport": "Basketball",
+    "strLeagueAlternate": "Ligat HaAl, \u05dc\u05d9\u05d2\u05ea \u05d4\u05e2\u05dc\u200e"
+  },
+  {
+    "idLeague": "4475",
+    "strLeague": "Turkish Basketbol Super Ligi",
+    "strSport": "Basketball",
+    "strLeagueAlternate": "BSL"
+  },
+  {
+    "idLeague": "4476",
+    "strLeague": "Russian VTB United League",
+    "strSport": "Basketball",
+    "strLeagueAlternate": "\u0415\u0434\u0438\u043d\u0430\u044f \u041b\u0438\u0433\u0430 \u0412\u0422\u0411"
+  },
+  {
+    "idLeague": "4477",
+    "strLeague": "Adriatic ABA League",
+    "strSport": "Basketball",
+    "strLeagueAlternate": "Adriatic League"
+  },
+  {
+    "idLeague": "4478",
+    "strLeague": "Lithuanian LKL",
+    "strSport": "Basketball",
+    "strLeagueAlternate": "Lietuvos krep\u0161inio lyga"
+  },
+  {
+    "idLeague": "4516",
+    "strLeague": "WNBA",
+    "strSport": "Basketball",
+    "strLeagueAlternate": ""
+  },
+  {
+    "idLeague": "4518",
+    "strLeague": "_Defunct Basketball Teams",
+    "strSport": "Basketball",
+    "strLeagueAlternate": ""
+  },
+  {
+    "idLeague": "4546",
+    "strLeague": "EuroLeague Basketball",
+    "strSport": "Basketball",
+    "strLeagueAlternate": ""
+  },
+  {
+    "idLeague": "4547",
+    "strLeague": "EuroCup Basketball",
+    "strSport": "Basketball",
+    "strLeagueAlternate": ""
+  },
+  {
+    "idLeague": "4548",
+    "strLeague": "Basketball Champions League",
+    "strSport": "Basketball",
+    "strLeagueAlternate": ""
+  },
+  {
+    "idLeague": "4549",
+    "strLeague": "FIBA Basketball World Cup",
+    "strSport": "Basketball",
+    "strLeagueAlternate": ""
+  },
+  {
+    "idLeague": "4577",
+    "strLeague": "French LNB Pro B",
+    "strSport": "Basketball",
+    "strLeagueAlternate": "LNB Pro B"
+  },
+  {
+    "idLeague": "4578",
+    "strLeague": "Polish Basketball League",
+    "strSport": "Basketball",
+    "strLeagueAlternate": "Polska Liga Koszyk\u00f3wki"
+  },
+  {
+    "idLeague": "4579",
+    "strLeague": "Belgian PBL",
+    "strSport": "Basketball",
+    "strLeagueAlternate": "Pro Basketball League"
+  },
+  {
+    "idLeague": "4580",
+    "strLeague": "Hungarian Nemzeti Bajnoks\u00e1g IA",
+    "strSport": "Basketball",
+    "strLeagueAlternate": ""
+  },
+  {
+    "idLeague": "4607",
+    "strLeague": "NCAA Division I Basketball Mens",
+    "strSport": "Basketball",
+    "strLeagueAlternate": "College basketball"
+  },
+  {
+    "idLeague": "4734",
+    "strLeague": "Argentine LNB",
+    "strSport": "Basketball",
+    "strLeagueAlternate": "Liga Nacional de B\u00e1squet"
+  }
+]
