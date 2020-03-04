@@ -1,13 +1,12 @@
 from django.db import models
 
 from .Player import Player
-from .Round import Round
 from .Team import Team
 
 
 class Game(models.Model):
     external_id = models.IntegerField()
-    round = models.ForeignKey(Round, on_delete=models.CASCADE)
+    round = models.IntegerField()
     name = models.CharField(max_length=50)
     visited = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='visited')
     visitors = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='visitors')

@@ -35,6 +35,7 @@ def load_leagues(request):
             for shallow_league in from_json(league_path):
                 if not is_in_DB(shallow_league['idLeague']):
                     load_league(shallow_league)
+                    time.sleep(2)
     return HttpResponse('')
 
 
