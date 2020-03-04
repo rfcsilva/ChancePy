@@ -32,5 +32,12 @@ def load_team(team_json, league, country):
 	team.leagues.add(league)
 	print(team)
 
+def find_by_name(name):
+	teams = Team.objects.filter(name=name)
+	if teams.count() > 0:
+		return teams.first()
+	else:
+		return None
+
 def is_in_DB(code):
     return Team.objects.filter(external_id=code).count() > 0
