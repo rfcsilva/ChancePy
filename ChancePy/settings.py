@@ -122,3 +122,7 @@ COUNTRIES = 'data/countries.csv'
 LEAGUES = 'data/leagues.json'
 LEAGUES_ARR = ['data/soccer.json', 'data/handball.json', 'data/basket.json', 'data/voley.json', 'data/hockey.json']
 LEAGUE_LOOKUP_URL = 'https://www.thesportsdb.com/api/v1/json/1/lookupleague.php'
+
+
+# Teams INFO
+TEAMS_BY_LEAGUE_URL = 'https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php'
