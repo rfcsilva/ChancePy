@@ -62,7 +62,7 @@ def is_in_DB(id):
 
 def goals_by_half(total_goals_full_string):
 	goals = [0, 0]
-	splited_goal_string = map( lambda goal : goal.split("':")[0], away_goals.split(';')[:2])
+	splited_goal_string = map( lambda goal : goal.split("':")[0], away_goals.split(';')[:-1])
 	for goal in splited_goal_string:
 		if goal > 45:
 			goal[0] = goals[0] + 1
