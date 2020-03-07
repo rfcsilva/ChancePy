@@ -3,10 +3,12 @@ from django.http import HttpResponse
 import time
 from datetime import datetime
 
-from chancePyApp.models import Game
-from chancePyApp.views import Team
+from chancePyApp.models import Game, League
+from chancePyApp.views import find_team_by_name 
 
-def load_all_games(request, id):
+from chancePyApp.http import http
+
+def load_all_games(request):
 	leagues = League.objects.all()
 	for league in leagues:
 		for season in get_league_seasons(league.external_id):
@@ -19,23 +21,23 @@ def load_all_games(request, id):
 
 			for event_json in events_json:
 				if not is_in_DB(event_json['idEvent']):
+					print(f"Processing of {event_json['strEvent']} of season {season['strSeason']}")
 					load_game(event_json, league)
-					time.sleep(2)
 
 	print('game_details')
 
 
 def load_game(event_json, league):
 
-	visited = Team.find_by_name(event_json['strHomeTeam'])
-	visitors = Team.find_by_name(event_json['strAwayTeam'])
+	visited = find_team_by_name(event_json['strHomeTeam'])
+	visitors = find_team_by_name(event_json['strAwayTeam'])
 
 	# TODO: add overtime goals
 	visited_goals = goals_by_half(event_json['strHomeGoalDetails'])
 	visitors_goals = goals_by_half(event_json['strAwayGoalDetails'])
 
 	game = Game(external_id=event_json['idEvent'],
-				round_nr=event_json['intRound'],
+				round_nr= event_json['intRound'] if event_json['intRound'] is not None else -1,
 				league=league,
 				name=event_json['strEvent'],
 				visited=visited,
@@ -45,14 +47,14 @@ def load_game(event_json, league):
 				visited_goals_half_time=visited_goals[0],
 				visitors_goals_half_time=visitors_goals[0],
 				externalFileName=event_json['strFilename'],
-				visited_shots=event_json['intHomeShots'],
-				visitors_shots=event_json['intAwayShots'],
-				date=datetime.strptime(event_json['dateEvent'], "%Y-%m-%d")
+				visited_shots=event_json['intHomeShots'] or -1,
+				visitors_shots=event_json['intAwayShots'] or -1,
+				date=datetime.strptime(event_json['dateEvent'], "%Y-%m-%d"))
 	game.save()
 
 def get_league_seasons(id):
 	# Building HTTP request
-	params = {'id': league.external_id}
+	params = {'id': id}
 	return http.GET(settings.LEAGUE_SEASONS_URL, params)['seasons']
 	
 
@@ -62,10 +64,10 @@ def is_in_DB(id):
 
 def goals_by_half(total_goals_full_string):
 	goals = [0, 0]
-	splited_goal_string = map( lambda goal : goal.split("':")[0], away_goals.split(';')[:-1])
-	for goal in splited_goal_string:
+	splited_goal_string = map( lambda goal : goal.split("':")[0], total_goals_full_string.split(';')[:-1])
+	for goal in map( lambda goal: int(goal), splited_goal_string):
 		if goal > 45:
-			goal[0] = goals[0] + 1
+			goals[0] = goals[0] + 1
 		else:
 			goals[1] = goals[1] + 1
 	return goals

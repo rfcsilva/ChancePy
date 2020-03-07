@@ -32,7 +32,7 @@ def load_team(team_json, league, country):
 	team.leagues.add(league)
 	print(team)
 
-def find_by_name(name):
+def find_team_by_name(name):
 	teams = Team.objects.filter(name=name)
 	if teams.count() > 0:
 		return teams.first()
