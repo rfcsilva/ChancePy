@@ -9,7 +9,7 @@ from chancePyApp.views import find_team_by_name
 from chancePyApp.http import http
 
 def load_all_games(request):
-	leagues = League.objects.all()
+	leagues = League.objects.filter(sport='Soccer')
 	for league in leagues:
 		for season in get_league_seasons(league.external_id):
 
@@ -32,9 +32,7 @@ def load_game(event_json, league):
 	visited = find_team_by_name(event_json['strHomeTeam'])
 	visitors = find_team_by_name(event_json['strAwayTeam'])
 
-	# TODO: add overtime goals
-	visited_goals = goals_by_half(event_json['strHomeGoalDetails'])
-	visitors_goals = goals_by_half(event_json['strAwayGoalDetails'])
+	goals = get_goals(event_json)
 
 	game = Game(external_id=event_json['idEvent'],
 				round_nr= event_json['intRound'] if event_json['intRound'] is not None else -1,
@@ -42,10 +40,10 @@ def load_game(event_json, league):
 				name=event_json['strEvent'],
 				visited=visited,
 				visitors=visitors,
-				visited_goals= sum(visited_goals),
-				visitors_goals=sum(visitors_goals), 
-				visited_goals_half_time=visited_goals[0],
-				visitors_goals_half_time=visitors_goals[0],
+				visited_goals= sum(goals[0]),
+				visitors_goals=sum(goals[1]), 
+				visited_goals_half_time=goals[0][0],
+				visitors_goals_half_time=goals[1][0],
 				externalFileName=event_json['strFilename'],
 				visited_shots=event_json['intHomeShots'] or -1,
 				visitors_shots=event_json['intAwayShots'] or -1,
@@ -60,6 +58,21 @@ def get_league_seasons(id):
 
 def is_in_DB(id):
 	return Game.objects.filter(external_id=id).count() > 0
+
+
+def get_goals(event_json):
+	# TODO: add overtime goals
+	if event_json['strHomeGoalDetails'] is None or "":
+		visited_goals = [int(event_json['intHomeScore']), 0]
+	else:
+		visited_goals = goals_by_half(event_json['strHomeGoalDetails'])
+
+	if event_json['strAwayGoalDetails'] is None or "":
+		visitors_goals = [int(event_json['intAwayScore']), 0]
+	else:
+		visitors_goals = goals_by_half(event_json['strAwayGoalDetails'])
+
+	return [visited_goals, visitors_goals]	
 
 
 def goals_by_half(total_goals_full_string):
