@@ -1,12 +1,11 @@
-from django.conf import settings
-from django.http import HttpResponse
-import time
 from datetime import datetime
 
-from chancePyApp.models import Game, League
-from chancePyApp.views import find_team_by_name 
+from django.conf import settings
 
 from chancePyApp.http import http
+from chancePyApp.models import Game, League
+from chancePyApp.views import find_team_by_name
+
 
 def load_all_games(request):
 	leagues = League.objects.filter(sport='Soccer')
